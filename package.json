@@ -1,0 +1,19 @@
+{
+  "name": "talk",
+  "version": "1.0.0",
+  "description": "A simple anonymous chat app",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fylipp/talk.git"
+  },
+  "author": "Philipp Ploder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fylipp/talk/issues"
+  },
+  "homepage": "https://github.com/Fylipp/talk#readme",
+  "dependencies": {
+    "ws": "^3.1.0"
+  }
+}
