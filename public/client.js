@@ -23,7 +23,8 @@ window.onload = function () {
 
     input.disabled = true;
 
-    var ws = new WebSocket('ws://' + window.location.hostname + ":8080");
+    var wsProtocol = location.protocol === 'https:' ?  'wss' : 'ws';
+    var ws = new WebSocket(wsProtocol + '://' + window.location.hostname + ":8080");
 
     ws.onopen = function (event) {
         input.disabled = false;
