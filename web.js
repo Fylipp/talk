@@ -54,7 +54,7 @@ const requestHandler = (request, response) => {
 
 const server = http.createServer(requestHandler)
 
-server.listen(80, err => {
+server.listen(process.env.PORT || 80, err => {
     if (err) {
         return console.log('An error occurred: ', err)
     }
