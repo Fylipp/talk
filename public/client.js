@@ -95,6 +95,8 @@ window.onload = function () {
 
         if (author === selfName) {
             msgAuthor.classList.add('self');
+        } else {
+            msgAuthor.style.color = colorForName(author);
         }
 
         msg.appendChild(msgAuthor);
@@ -107,3 +109,7 @@ window.onload = function () {
         ws.send(JSON.stringify({ message: message }));
     }
 };
+
+function colorForName(name) {
+    return "black";
+}
