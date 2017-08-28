@@ -1,6 +1,9 @@
 # talk
 **talk** is a simple anonymous chat application written in JavaScript. This is my first attempt at using NodeJS.
 
+## Demo
+A demo is deployed [here](https://fylipp-talk.herokuapp.com).
+
 ## Installation
 Clone the repository and run `npm install` to install the dependencies.
 
