@@ -7,6 +7,8 @@ window.onload = function () {
 
     var selfName = undefined;
 
+    var heart;
+
     function setStatus(status) {
         for (var i = 0; i < statusTargets.length; i++) {
             statusTargets[i].setAttribute('data-status', status);
@@ -28,25 +30,37 @@ window.onload = function () {
     ws.onopen = function (event) {
         input.disabled = false;
         setStatus('connected');
+
+        heart = setInterval(function () {
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ heartbeat: 1 }));
+            }
+        }, 5000);
     };
 
     ws.onclose = function (event) {
         input.disabled = true;
         setStatus('disconnected');
+
+        clearInterval(heart);
     };
 
     ws.onmessage = function (event) {
-        var json = JSON.parse(event.data);
+        try {
+            var json = JSON.parse(event.data);
 
-        if (json.assignedName !== undefined) {
-            setName(json.assignedName);
-        } else {
-            var author = json.author;
-            var message = json.message;
+            if (json.assignedName !== undefined) {
+                setName(json.assignedName);
+            } else {
+                var author = json.author;
+                var message = json.message;
 
-            if (author && message) {
-                display(author, message);
+                if (author && message) {
+                    display(author, message);
+                }
             }
+        } catch (e) {
+            console.log('Error processing message: ', e);
         }
     };
 
@@ -90,6 +104,6 @@ window.onload = function () {
     }
 
     function send(message) {
-        ws.send(message);
+        ws.send(JSON.stringify({ message: message }));
     }
 };

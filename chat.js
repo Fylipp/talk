@@ -43,9 +43,17 @@ exports.init = (server) => {
 
         ws.on('message', message => {
             try {
-                broadcast(ws.$clientName, message)
+                var json = JSON.parse(message)
+
+                if (json.message) {
+                    try {
+                        broadcast(ws.$clientName, json.message)
+                    } catch (e) {
+                        console.log('Error broadcasting message: ', e)
+                    }
+                }
             } catch (e) {
-                console.log('Error broadcasting message: ', e)
+                console.log('Error processing message: ', e)
             }
         })
     })
