@@ -5,7 +5,7 @@ const WebSocket = require('ws')
 exports.init = (config, server) => {
     function generateName() {
         const random = array => array[Math.floor(Math.random() * array.length)]
-        return `${random(config.nameGeneratorAdjectives)} ${random(config.nameGeneratorAdjectives)}`
+        return `${random(config.nameGeneratorAdjectives)} ${random(config.nameGeneratorNouns)}`
     }
 
     const wss = new WebSocket.Server({ server: server })
