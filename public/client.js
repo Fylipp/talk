@@ -33,7 +33,9 @@ window.onload = function () {
 
         heart = setInterval(function () {
             if (ws.readyState === WebSocket.OPEN) {
-                ws.send(JSON.stringify({ heartbeat: 1 }));
+                ws.send(JSON.stringify({
+                    heartbeat: 1
+                }));
             }
         }, 5000);
     };
@@ -106,10 +108,33 @@ window.onload = function () {
     }
 
     function send(message) {
-        ws.send(JSON.stringify({ message: message }));
+        ws.send(JSON.stringify({
+            message: message
+        }));
     }
 };
 
 function colorForName(name) {
-    return "black";
+    var h = Math.abs(strHash(name)) % 361;
+    var s = 100;
+    var l = 50;
+
+    return "hsl(" + h + "," + s + "%," + l + "%)";
+}
+
+function strHash(str) {
+    var hash = 0;
+    var i, chr;
+
+    if (str.length === 0) {
+        return hash;
+    }
+
+    for (i = 0; i < str.length; i++) {
+        chr = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0;
+    }
+
+    return hash;
 }
