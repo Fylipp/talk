@@ -2,16 +2,12 @@
 
 const WebSocket = require('ws')
 
-function generateName() {
-    const adjs = ['Curious', 'Red', 'Tall', 'Shallow', 'Redundant', 'Wild', 'Old', 'Fresh', 'Friendly', 'Wet', 'Crazy', 'Delicious', 'Hairy', 'Fast']
-    const nouns = ['Kitten', 'House', 'Dog', 'Puppy', 'Snow', 'Smith', 'Lion', 'Fridge', 'Tornado', 'Giant', 'Snowman', 'Toad', 'Eagle', 'Hedgehog']
-
-    const random = array => array[Math.floor(Math.random() * array.length)]
-
-    return `${random(adjs)} ${random(nouns)}`
-}
-
 exports.init = (config, server) => {
+    function generateName() {
+        const random = array => array[Math.floor(Math.random() * array.length)]
+        return `${random(config.nameGeneratorAdjectives)} ${random(config.nameGeneratorAdjectives)}`
+    }
+
     const wss = new WebSocket.Server({ server: server })
 
     wss.on('listening', () => {

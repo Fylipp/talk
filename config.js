@@ -31,5 +31,11 @@ module.exports = {
         'client.js': {
             mime: 'application/javascript'
         }
-    }
+    },
+
+    // The adjectives availible to the name generator
+    nameGeneratorAdjectives: ['Curious', 'Red', 'Tall', 'Shallow', 'Redundant', 'Wild', 'Old', 'Fresh', 'Friendly', 'Wet', 'Crazy', 'Delicious', 'Hairy', 'Fast'],
+
+    // The nouns availible to the name generator
+    nameGeneratorNouns: ['Kitten', 'House', 'Dog', 'Puppy', 'Snow', 'Smith', 'Lion', 'Fridge', 'Tornado', 'Giant', 'Snowman', 'Toad', 'Eagle', 'Hedgehog']
 }
