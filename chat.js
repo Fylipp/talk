@@ -2,8 +2,6 @@
 
 const WebSocket = require('ws')
 
-const maxConnections = 12
-
 function generateName() {
     const adjs = ['Curious', 'Red', 'Tall', 'Shallow', 'Redundant', 'Wild', 'Old', 'Fresh', 'Friendly', 'Wet', 'Crazy', 'Delicious', 'Hairy', 'Fast']
     const nouns = ['Kitten', 'House', 'Dog', 'Puppy', 'Snow', 'Smith', 'Lion', 'Fridge', 'Tornado', 'Giant', 'Snowman', 'Toad', 'Eagle', 'Hedgehog']
@@ -13,7 +11,7 @@ function generateName() {
     return `${random(adjs)} ${random(nouns)}`
 }
 
-exports.init = (server) => {
+exports.init = (config, server) => {
     const wss = new WebSocket.Server({ server: server })
 
     wss.on('listening', () => {
@@ -21,11 +19,11 @@ exports.init = (server) => {
     })
 
     wss.on('connection', ws => {
-        if (wss.clients.size >= maxConnections) {
+        if (wss.clients.size >= config.maxConnections) {
             ws.send(JSON.stringify({ author: 'Server (private)', message: 'This server is currently full.' }))
             ws.close()
 
-            console.log(`Incoming websocket connection dismissed due to server being full (max = ${maxConnections})`)
+            console.log(`Incoming websocket connection dismissed due to server being full (max = ${config.maxConnections})`)
 
             return
         }

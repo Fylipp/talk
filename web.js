@@ -14,8 +14,8 @@ function loadRaw(file) {
     return fs.readFileSync(path.join(__dirname, resFolder, file))    
 }
 
-exports.init = (port) => {
-    console.log('Loading resources...')    
+exports.init = (config) => {
+    console.log('Loading resources...')
 
     const res = {
         '/': {
@@ -55,7 +55,7 @@ exports.init = (port) => {
     
     const server = exports.server = http.createServer(requestHandler)
     
-    server.listen(port, err => {
+    server.listen(process.env.PORT || config.port, err => {
         if (err) {
             return console.log('An error occurred: ', err)
         }

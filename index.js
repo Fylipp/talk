@@ -1,7 +1,9 @@
 'use strict'
 
+const config = require('./config.js')
+
 const web = require('./web.js')
-const server = web.init(process.env.PORT || 80);
+const server = web.init(config);
 
 const chat = require('./chat.js')
-chat.init(server)
+chat.init(config, server)
